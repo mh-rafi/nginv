@@ -1,0 +1,76 @@
+<!-- <ngx-datatable
+  class="material fullscreen"
+  [columnMode]="'force'"
+  [headerHeight]="50"
+  [footerHeight]="0"
+  [rowHeight]="50"
+  [scrollbarV]="true"
+  [scrollbarH]="true"
+  [rows]="orders">
+  <ngx-datatable-column name="OrderNo" prop="OrderNo" [width]="80"></ngx-datatable-column>
+  <ngx-datatable-column name="Vendor" prop="Vendor"></ngx-datatable-column>
+  <ngx-datatable-column name="OrderDate" prop="OrderDate"></ngx-datatable-column>
+  <ngx-datatable-column name="InventoryStatus" prop="InventoryStatus"></ngx-datatable-column>
+  <ngx-datatable-column name="Location" prop="Location"></ngx-datatable-column>
+  <ngx-datatable-column name="RequestedShipDate" prop="RequestedShipDate"></ngx-datatable-column>
+  <ngx-datatable-column name="DueDate" prop="DueDate"></ngx-datatable-column>
+  <ngx-datatable-column name="Total" prop="Total"></ngx-datatable-column>
+  <ngx-datatable-column name="Paid" prop="Paid"></ngx-datatable-column>
+  
+  <ngx-datatable-column name="Edit/Details">
+    <ng-template let-row="row" ngx-datatable-cell-template>
+      <button 
+      md-raised-button 
+      md-icon-button 
+      md-button-sm 
+      color="primary" 
+      type="button"
+      [routerLink]="['/vendor/edit', row.Id]"><md-icon>edit</md-icon></button>
+    </ng-template>
+  </ngx-datatable-column>
+</ngx-datatable> -->
+
+<kendo-grid [data]="orders">
+    <kendo-grid-column field="OrderNo" title="OrderNo" >
+    </kendo-grid-column>
+    <kendo-grid-column field="Vendor" title="Vendor" >
+      <ng-template let-dataItem kendoGridCellTemplate>
+        {{dataItem.Vendor?.Name}}
+      </ng-template>
+    </kendo-grid-column>
+    <kendo-grid-column field="OrderDate" title="Order Date">
+      <ng-template let-dataItem kendoGridCellTemplate>
+        {{dataItem.OrderDate | date}}
+      </ng-template>
+    </kendo-grid-column>
+    <kendo-grid-column field="InventoryStatus" title="Inventory Status">
+    </kendo-grid-column>
+    <kendo-grid-column field="Location" title="Location" >
+    </kendo-grid-column>
+    <kendo-grid-column field="RequestedShipDate" title="Requested Ship Date" >
+    </kendo-grid-column>
+    <kendo-grid-column field="DueDate" title="Due Date" >
+    </kendo-grid-column>
+    <kendo-grid-column field="Total" title="Total" >
+    </kendo-grid-column>
+    <kendo-grid-column field="Paid" title="Paid" >
+    </kendo-grid-column>
+    <kendo-grid-column>
+      <ng-template let-dataItem kendoGridCellTemplate>
+        <button 
+        md-raised-button 
+        md-icon-button 
+        md-button-sm 
+        color="primary" 
+        type="button"
+        [routerLink]="['/purchase-order/edit', dataItem.Id]"><md-icon>edit</md-icon></button>
+        <button 
+        md-raised-button 
+        md-icon-button 
+        md-button-sm 
+        color="warn" 
+        type="button"
+        (click)="remove(dataItem.Id)"><md-icon>close</md-icon></button>
+      </ng-template>
+    </kendo-grid-column>
+</kendo-grid>

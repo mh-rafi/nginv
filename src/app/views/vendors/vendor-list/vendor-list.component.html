@@ -1,0 +1,37 @@
+<kendo-grid [data]="vendors">
+    <kendo-grid-column field="Name" title="Name" >
+    </kendo-grid-column>
+    <kendo-grid-column field="Phone" title="Phone" >
+    </kendo-grid-column>
+    <kendo-grid-column field="Email" title="Email">
+    </kendo-grid-column>
+    <kendo-grid-column field="City" title="City">
+    </kendo-grid-column>
+    <kendo-grid-column field="Address" title="Address" >
+    </kendo-grid-column>
+    <kendo-grid-column field="State" title="State" >
+    </kendo-grid-column>
+    <kendo-grid-column field="Discount" title="Discount" >
+      <ng-template kendoGridCellTemplate let-dataItem>
+        {{dataItem.Discount}}%
+      </ng-template>
+    </kendo-grid-column>
+    <kendo-grid-column>
+      <ng-template let-dataItem kendoGridCellTemplate>
+        <button 
+        md-raised-button 
+        md-icon-button 
+        md-button-sm 
+        color="primary" 
+        type="button"
+        [routerLink]="['/vendor/edit', dataItem.Id]"><md-icon>edit</md-icon></button>
+        <button 
+        md-raised-button 
+        md-icon-button 
+        md-button-sm 
+        color="warn" 
+        type="button"
+        (click)="remove(dataItem.Id)"><md-icon>close</md-icon></button>
+      </ng-template>
+    </kendo-grid-column>
+</kendo-grid>

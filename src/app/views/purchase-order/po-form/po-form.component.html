@@ -1,0 +1,235 @@
+<md-card>
+  <md-card-title>{{title | translate}}</md-card-title>
+  <md-card-subtitle>{{subtitle | translate}}</md-card-subtitle>
+  <form [formGroup]="form" (submit)="onFormSubmit()">
+    <md-card-content>
+      <div fxLayout="row" fxLayoutWrap="wrap">
+        <div fxLayout="column" fxFlex.gt-xs="50" fxFlex="100" class="pr-1">
+
+          <div class="mb-1">
+            <md-input-container style="width: 100%">
+              <input 
+              mdInput 
+              placeholder="Vendor" 
+              [mdAutocomplete]="vendorAuto"
+              name="Vendor"
+              [(ngModel)]="order.Vendor"
+              [formControl]="form.controls['Vendor']">
+            </md-input-container>
+            <md-autocomplete #vendorAuto="mdAutocomplete" [displayWith]="displayFn">
+              <md-option *ngFor="let vendor of filteredVendors | async" [value]="vendor">
+                {{ vendor.Name }}
+              </md-option>
+            </md-autocomplete>
+            <small *ngIf="form.controls['Vendor'].hasError('required') && form.controls['Vendor'].touched" class="mat-text-warn">You must include a vendor.</small>
+          </div>
+
+          <div class="mb-1">
+            <md-input-container style="width: 100%">
+              <input 
+              mdInput 
+              placeholder="Order No"
+              [(ngModel)]="order.OrderNo" 
+              [formControl]="form.controls['OrderNo']">
+            </md-input-container>
+            <small *ngIf="form.controls['OrderNo'].hasError('required') && form.controls['OrderNo'].touched" class="mat-text-warn">You must include an order no.</small>
+          </div>
+
+          <div class="mb-1">
+            <md-input-container style="width: 100%">
+              <input 
+              mdInput 
+              [mdDatepicker]="OrderDatePicker" 
+              [(ngModel)]="order.OrderDate" 
+              placeholder="Date"
+              [formControl]="form.controls['OrderDate']">
+              <button mdSuffix [mdDatepickerToggle]="OrderDatePicker"></button>
+            </md-input-container>
+            <md-datepicker #OrderDatePicker></md-datepicker>
+            <small *ngIf="form.controls['OrderDate'].hasError('required') && form.controls['OrderDate'].touched" class="mat-text-warn">You must include an Order Date.</small>
+          </div>
+
+          <div class="mb-1">
+            <md-input-container style="width: 100%">
+              <input 
+              mdInput 
+              placeholder="Inventory Status"
+              [(ngModel)]="order.InventoryStatus" 
+              [formControl]="form.controls['InventoryStatus']">
+            </md-input-container>
+          </div>
+          
+        </div>
+
+        <div fxLayout="column" fxFlex.gt-xs="50" fxFlex="100">
+          <div class="mb-1">
+            <md-input-container style="width: 100%">
+              <input 
+              mdInput 
+              placeholder="Location"
+              [(ngModel)]="order.Location" 
+              [formControl]="form.controls['Location']">
+            </md-input-container>
+          </div>
+
+          <div class="mb-1">
+            <md-input-container style="width: 100%">
+              <input 
+              mdInput 
+              [mdDatepicker]="shipDatePicker" 
+              placeholder="Requested Ship Date"
+              [(ngModel)]="order.RequestedShipDate" 
+              [formControl]="form.controls['RequestedShipDate']">
+              <button mdSuffix [mdDatepickerToggle]="shipDatePicker"></button>
+            </md-input-container>
+            <md-datepicker #shipDatePicker></md-datepicker>
+          </div>
+
+          <div class="mb-1">
+            <md-input-container style="width: 100%">
+              <input 
+              mdInput 
+              [mdDatepicker]="DueDatePicker" 
+              [(ngModel)]="order.DueDate" 
+              placeholder="Due Date"
+              [formControl]="form.controls['DueDate']">
+              <button mdSuffix [mdDatepickerToggle]="DueDatePicker"></button>
+            </md-input-container>
+            <md-datepicker #DueDatePicker></md-datepicker>
+          </div>
+
+        </div>
+        <!--======  Items =======-->
+        <div fxLayout="column" fxFlex="100">
+          <div class="mb-1">
+            <h5 [style.margin]="'0 0 10px'">Items</h5>
+            <kendo-grid
+              [data]="order.Items"
+              [pageable]="true" [sortable]="true"
+              [pageSize]="gridState.take" [skip]="gridState.skip" [sort]="gridState.sort"
+              (dataStateChange)="onStateChange($event)"
+              (edit)="editItemHandler($event)" (cancel)="cancelItemHandler($event)"
+              (save)="saveItemHandler($event)" (remove)="removeItemHandler($event)"
+              (add)="addItemHandler($event)">
+            <ng-template kendoGridToolbarTemplate>
+                <button kendoGridAddCommand type="button">Add new</button>
+            </ng-template>
+            <kendo-grid-column title="Received">
+              <ng-template kendoGridCellTemplate let-dataItem="dataItem">
+                {{dataItem.isReceived ? 'Received' : 'Pending'}}
+              </ng-template>
+              <ng-template kendoGridEditTemplate let-dataItem="dataItem">
+                <input 
+                [(ngModel)]="dataItem.isReceived" 
+                [formControl]="itemForm.controls['isReceived']"
+                type="checkbox">
+              </ng-template>
+            </kendo-grid-column>
+            <kendo-grid-column field="Name" title="Product Name">
+              <ng-template kendoGridEditTemplate let-dataItem="dataItem">
+                <kendo-combobox 
+                [(ngModel)]="dataItem.Name" 
+                [formControl]="itemForm.controls['Name']" 
+                [data]="products"
+                [textField]="'Name'"
+                [valueField]="'Name'"
+                [valuePrimitive]="true"
+                (valueChange)="handleItemChange($event)">
+                </kendo-combobox>
+              </ng-template>
+            </kendo-grid-column>
+            <kendo-grid-column field="Quantity" title="Quantity">
+              <ng-template kendoGridEditTemplate let-dataItem="dataItem">
+                <input 
+                [(ngModel)]="dataItem.Quantity" 
+                name="Quantity"
+                [value]=""
+                [formControl]="itemForm.controls['Quantity']" 
+                class="k-textbox" 
+                type="number" 
+                required/>
+              </ng-template>
+            </kendo-grid-column>
+            <kendo-grid-column field="UnitPrice" title="Unit Price">
+              <ng-template kendoGridEditTemplate let-dataItem="dataItem">
+                <input 
+                [(ngModel)]="dataItem.UnitPrice" 
+                name="UnitPrice" 
+                [formControl]="itemForm.controls['UnitPrice']" 
+                class="k-textbox" 
+                type="number" 
+                required/>
+              </ng-template>
+            </kendo-grid-column>
+            <kendo-grid-column field="Discount" title="Discount">
+              <ng-template kendoGridEditTemplate let-dataItem="dataItem">
+                <input
+                [(ngModel)]="dataItem.Discount" 
+                name="Discount" 
+                [formControl]="itemForm.controls['Discount']" 
+                class="k-textbox"
+                type="number"/>
+              </ng-template>
+            </kendo-grid-column>
+            <kendo-grid-column title="Subtotal">
+              <ng-template kendoGridCellTemplate let-dataItem="dataItem">
+                {{(dataItem.UnitPrice * dataItem.Quantity * (1 - (dataItem.Discount || 0)/100))}}
+              </ng-template>
+              <ng-template kendoGridEditTemplate let-dataItem="dataItem">
+                <input 
+                [(ngModel)]="dataItem.Subtotal" 
+                [value]="(dataItem.UnitPrice * dataItem.Quantity * (1 - (dataItem.Discount || 0)/100))"
+                name="Subtotal" 
+                [formControl]="itemForm.controls['Subtotal']" 
+                class="k-textbox" 
+                type="number" disabled/>
+              </ng-template>
+            </kendo-grid-column>
+            <kendo-grid-command-column title="Actions" width="220">
+                <ng-template kendoGridCellTemplate let-isNew="isNew">
+                    <button kendoGridEditCommand class="k-primary" type="button">Edit</button>
+                    <button kendoGridRemoveCommand type="button">Remove</button>
+                    <button kendoGridSaveCommand [disabled]="itemForm?.invalid" type="button">{{ isNew ? 'Add' : 'Update' }}</button>
+                    <button kendoGridCancelCommand type="button">{{ isNew ? 'Discard changes' : 'Cancel' }}</button>
+                </ng-template>
+            </kendo-grid-command-column>
+          </kendo-grid>
+          </div>
+        </div>
+
+        <div fxLayout="column" fxFlex.gt-xs="50" fxFlex="100" class="pr-1">
+
+        </div>
+        <div fxLayout="column" fxFlex.gt-xs="50" fxFlex="100" class="pr-1">
+          <div class="mb-1">
+            <p>Total: {{calcItemTotal()}}</p>
+          </div>
+
+          <div class="mb-1">
+            <md-input-container style="width: 100%">
+              <input 
+              mdInput 
+              placeholder="Paid"
+              [(ngModel)]="order.Paid" 
+              [formControl]="form.controls['Paid']">
+            </md-input-container>
+          </div>
+        </div>
+      </div>
+    </md-card-content>
+    <hr>
+    <md-card-actions>
+      <button 
+      md-raised-button 
+      color="primary" 
+      type="submit" 
+      [disabled]="!form.valid">{{buttonText | translate}}</button>
+      <span fxFlex></span>
+      <button 
+      md-raised-button 
+      color="accent" 
+      type="button"
+      routerLink="/purchase-order/list">Back to order list</button>
+    </md-card-actions>
+  </form>
+</md-card>

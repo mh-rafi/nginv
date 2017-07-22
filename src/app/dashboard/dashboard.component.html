@@ -1,0 +1,155 @@
+<div fxLayout="row" fxLayoutWrap="wrap">
+
+  <div fxFlex.gt-sm="25" fxFlex.gt-xs="50" fxFlex="100">
+    <md-card class="card-widget mat-red">
+      <div md-card-widget>
+        <div md-card-float-icon>
+          <md-icon>phone</md-icon>
+        </div>
+        <div class="pl-0">
+          <h5 md-card-widget-title>10</h5>
+          <p>Vendors</p>
+        </div>
+        <span fxFlex></span>
+        <button 
+        md-raised-button 
+        md-icon-button
+        [md-menu-trigger-for]="vendorMenu" 
+        color="accent" 
+        type="button"><md-icon>more_vert</md-icon></button>
+        <md-menu #vendorMenu="mdMenu">
+          <button md-menu-item [routerLink]="['/vendor/add']">
+            <md-icon>add</md-icon>
+            New Vendor
+          </button>
+          <button md-menu-item [routerLink]="['/vendor/list']">
+            <md-icon>list</md-icon>
+            Vendor List
+          </button>
+        </md-menu>
+      </div>
+    </md-card>
+  </div>
+
+  <div fxFlex.gt-sm="25" fxFlex.gt-xs="50" fxFlex="100">
+    <md-card class="card-widget mat-teal">
+      <div md-card-widget>
+        <div class="pl-0">
+          <h5 md-card-widget-title>8</h5>
+          <p>Pending Purchase Order</p>
+        </div>
+        <span fxFlex></span>
+        <button 
+        md-raised-button 
+        md-icon-button
+        [md-menu-trigger-for]="poMenu" 
+        color="accent" 
+        type="button"><md-icon>more_vert</md-icon></button>
+        <md-menu #poMenu="mdMenu">
+          <button md-menu-item>
+            <md-icon>add</md-icon>
+            New Order
+          </button>
+          <button md-menu-item>
+            <md-icon>list</md-icon>
+            Order List
+          </button>
+        </md-menu>
+      </div>
+    </md-card>
+  </div>
+
+  <div fxFlex.gt-sm="25" fxFlex.gt-xs="50" fxFlex="100">
+    <md-card class="card-widget mat-purple">
+      <div md-card-widget>
+        <div md-card-float-icon>
+          <md-icon>local_offer</md-icon>
+        </div>
+        <div class="pl-0">
+          <h5 md-card-widget-title>12</h5>
+          <p>Pending Sales Order</p>
+        </div>
+      </div>
+    </md-card>
+  </div>
+
+  <div fxFlex.gt-sm="25" fxFlex.gt-xs="50" fxFlex="100">
+    <md-card class="card-widget mat-indigo">
+      <div md-card-widget>
+        <div md-card-float-icon>
+          <md-icon>email</md-icon>
+        </div>
+        <div class="pl-0">
+          <h5 md-card-widget-title>40</h5>
+          <p>Customers</p>
+        </div>
+      </div>
+    </md-card>
+  </div>
+</div>
+
+<div fxLayout="row" fxLayoutWrap="wrap">
+	<div fxFlex.gt-sm="50%" fxFlex="100">
+		<md-card>
+      <md-card-subtitle fxLayout="row" fxLayoutAlign="start center">
+        Monthly Sales &nbsp; <span class="font-weight-bold mat-text-primary">$</span>
+        <span fxFlex></span>
+      </md-card-subtitle>
+			<md-card-content>
+        <canvas height="200" baseChart class="chart"
+          [datasets]="barChartData"
+          [labels]="barChartLabels"
+          [options]="barChartOptions"
+          [colors]="chartColors"
+          [legend]="barChartLegend"
+          [chartType]="barChartType"></canvas>
+      </md-card-content>
+		</md-card>
+	</div>
+	<div fxFlex.gt-sm="50%" fxFlex.gt-xs="50" fxFlex="100">
+		<md-card>
+      <md-card-subtitle fxLayout="row" fxLayoutAlign="start center">
+        Last week Cost, Sales, Profit &nbsp; <span class="font-weight-bold mat-text-warn">+1600</span>
+        <span fxFlex></span>
+      </md-card-subtitle>
+			<md-card-content>
+        <canvas height="200" baseChart class="chart"
+          [data]="pieChartData"
+          [labels]="pieChartLabels"
+          [options]="pieChartOptions"
+          [colors]="pieChartColors"
+          [legend]="false"
+          [chartType]="pieChartType"></canvas>
+      </md-card-content>
+		</md-card>
+	</div>
+</div>
+
+<div fxLayout="row" fxLayoutWrap="wrap">
+  <div fxFlex.gt-sm="66.66%" fxFlex="100">
+    <ngx-datatable
+      class="material"
+      [rows]="products"
+      [columnMode]="'force'"
+      [headerHeight]="50"
+      [footerHeight]="0"
+      [rowHeight]="'auto'">
+      <ngx-datatable-column name="Top Products">
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          {{row['product']}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Last purchased">
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          {{row['date'] | date: 'MMMM dd'}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="In Stock">
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          <md-progress-bar mode="determinate" value="{{row['progress']}}" color="primary"></md-progress-bar>
+        </ng-template>
+      </ngx-datatable-column>
+    </ngx-datatable>
+  </div>
+  
+</div>
