@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+// import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { MaterialModule } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { TranslateModule } from 'ng2-translate/ng2-translate';
@@ -20,7 +20,6 @@ import { PoAddComponent } from './po-add/po-add.component';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    NgxDatatableModule,
     MaterialModule,
     FlexLayoutModule,
     TranslateModule,

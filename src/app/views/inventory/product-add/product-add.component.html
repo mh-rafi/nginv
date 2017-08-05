@@ -1,0 +1,79 @@
+<md-card>
+  <md-card-title>{{'Add New Product' | translate}}</md-card-title>
+  <form [formGroup]="productForm" (submit)="add()">
+    <md-card-content>
+      <div fxLayout="row" fxLayoutWrap="wrap">
+        <div fxLayout="column" fxFlex.gt-xs="50" fxFlex="100" class="pr-1">
+          <div class="mb-1">
+            <md-input-container style="width: 100%">
+              <input 
+              mdInput 
+              placeholder="Name"
+              name="Name"
+              [(ngModel)]="newProduct.Name" 
+              [formControl]="productForm.controls['name']">
+            </md-input-container>
+            <small *ngIf="productForm.controls['name'].hasError('required') && productForm.controls['name'].touched" class="mat-text-warn">You must include a name.</small>
+          </div>
+
+          <div class="mb-1">
+            <md-input-container style="width: 100%">
+              <input 
+              mdInput 
+              placeholder="Type"
+              [(ngModel)]="newProduct.Type" 
+              [formControl]="productForm.controls['type']">
+            </md-input-container>
+          </div>
+
+          <div class="mb-1">
+            <md-input-container style="width: 100%">
+              <input 
+              mdInput 
+              placeholder="Category"
+              [(ngModel)]="newProduct.Category" 
+              [formControl]="productForm.controls['category']">
+            </md-input-container>
+          </div>
+
+          <div class="mb-1">
+            <md-input-container style="width: 100%">
+              <input 
+              mdInput 
+              placeholder="Cost"
+              [(ngModel)]="newProduct.Cost" 
+              [formControl]="productForm.controls['cost']"
+              type="number">
+            </md-input-container>
+          </div>
+        </div>
+
+        <div fxLayout="column" fxFlex.gt-xs="50" fxFlex="100">
+          <div class="mb-1">
+            <md-input-container style="width: 100%">
+              <input 
+              mdInput 
+              placeholder="Sales Price"
+              [(ngModel)]="newProduct.SalesPrice" 
+              [formControl]="productForm.controls['salesPrice']">
+            </md-input-container>
+          </div>
+        </div>
+      </div>
+    </md-card-content>
+    <hr>
+    <md-card-actions>
+      <button 
+      md-raised-button 
+      color="primary" 
+      type="submit" 
+      [disabled]="!productForm.valid">{{'Add' | translate}}</button>
+      <span fxFlex></span>
+      <button 
+      md-raised-button 
+      color="accent" 
+      type="button"
+      [routerLink]="['/', 'inventory', 'product-list']">Back to product list</button>
+    </md-card-actions>
+  </form>
+</md-card>

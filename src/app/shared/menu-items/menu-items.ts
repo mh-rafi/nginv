@@ -34,30 +34,52 @@ const MENUITEMS = [
     icon: 'apps',
     badge: [],
     children: [
-      {state: 'list', name: 'LIST'},
-      {state: 'add', name: 'ADD'}
+      {state: 'list', name: 'Vendor List'},
+      {state: 'add', name: 'Add New Vendor'}
     ]
   }, {
     state: 'purchase-order',
     name: 'PO',
     type: 'sub',
-    icon: 'shopping_cart',
+    icon: 'add_shopping_cart',
     badge: [],
     children: [
-      {state: 'list', name: 'LIST'},
-      {state: 'add', name: 'ADD'}
+      {state: 'list', name: 'PO List'},
+      {state: 'add', name: 'Add New PO'}
     ]
   },
   {
-    state: 'product',
-    name: 'PRODUCT',
+    state: 'inventory',
+    name: 'Inventory',
     type: 'sub',
     icon: 'archive',
     badge: [],
     children: [
-      {state: 'list', name: 'LIST'}
+      {state: 'product-list', name: 'Product List'},
+      {state: 'product-add', name: 'Add New Product'}
     ]
-  }
+  },
+  {
+    state: 'sales-order',
+    name: 'SO',
+    type: 'sub',
+    icon: 'shopping_cart',
+    badge: [],
+    children: [
+      {state: 'list', name: 'SO List'}
+    ]
+  },
+  {
+    state: 'customer',
+    name: 'Customer',
+    type: 'sub',
+    icon: 'group',
+    badge: [],
+    children: [
+      {state: 'list', name: 'Cutomer List'},
+      {state: 'add', name: 'Add New Cutomer'}
+    ]
+  },
 ];
 
 @Injectable()

@@ -1,5 +1,6 @@
-<app-vendor-form 
+<vc-form
+[targetType]="'vendor'"
 [title]="'EDIT_VENDOR_TITLE'"
 [buttonText]="'UPDATE'"
-[vendor]="vendor"
-(onSubmit)="update($event)"></app-vendor-form>
+[targetObject]="vendor"
+(onSubmit)="update($event)"></vc-form>

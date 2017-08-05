@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-import { CookieService } from 'ng2-cookies';
+// import { CookieService } from 'ng2-cookies';
 
 import { AppLoaderService } from '../../../services/app-loader/app-loader.service';
 @Component({
@@ -14,7 +14,7 @@ export class SigninComponent implements OnInit {
   public form: FormGroup;
   constructor(private fb: FormBuilder, 
     private router: Router, 
-    private cookieService: CookieService,
+    // private cookieService: CookieService,
     private loader: AppLoaderService) {}
 
   ngOnInit() {
@@ -27,7 +27,7 @@ export class SigninComponent implements OnInit {
     // Dummy setup
     this.loader.open('Signing in');
     setTimeout(() => {
-      this.cookieService.set('auth_token', 'dummyAuthToken999999999999');
+      localStorage.setItem('auth_token', 'dummyAuthToken999999999999');
       this.router.navigate ( [ '/home' ] );
       this.loader.close();
     }, 500);

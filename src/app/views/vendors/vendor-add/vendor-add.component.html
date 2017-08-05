@@ -1,5 +1,6 @@
-<app-vendor-form 
+<vc-form 
+[targetType]="'vendor'"
 [title]="'ADD_VENDOR_TITLE'"
 [buttonText]="'ADD'"
-[vendor]="vendor"
-(onSubmit)="add($event)"></app-vendor-form>
+[targetObject]="vendor"
+(onSubmit)="add($event)"></vc-form>

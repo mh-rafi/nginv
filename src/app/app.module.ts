@@ -16,6 +16,8 @@ import { AuthService } from './services/auth/auth.service';
 import { VendorService } from './services/vendor/vendor.service';
 import { PurchaseOrderService } from './services/purchase-order/purchase-order.service';
 import { ProductService } from './services/product/product.service';
+import { SalesOrderService } from './services/sales-order/sales-order.service';
+import { CustomerService } from './services/customer/customer.service';
 
 import { AppRoutes } from './app.routing';
 import { AppComponent } from './app.component';
@@ -56,7 +58,9 @@ export function createTranslateLoader(http: Http) {
     CookieService, 
     VendorService, 
     PurchaseOrderService,
-    ProductService
+    ProductService,
+    SalesOrderService,
+    CustomerService
   ],
   bootstrap: [AppComponent]
 })

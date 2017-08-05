@@ -33,13 +33,8 @@ export class PoFormComponent implements OnInit {
   public itemForm: FormGroup;
   vendors = [];
   products = [];
-  // vendorCtrl: FormControl;
   filteredVendors: any = [];
-  public gridState: State = {
-    sort: [],
-    skip: 0,
-    take: 10
-  };
+
   constructor(private fb: FormBuilder,
   private vendorService: VendorService,
   private productService: ProductService) {
@@ -63,10 +58,7 @@ export class PoFormComponent implements OnInit {
     });
     productService.getAll()
     .flatMap((value:any) => value)
-    .map((value: any) => {
-      // console.log(value);
-      return value;
-    }).subscribe((productName: any[]) => {
+    .subscribe((productName: any[]) => {
       this.products.push(productName);
       // console.log(productName);
     });
@@ -91,13 +83,18 @@ export class PoFormComponent implements OnInit {
                : this.vendors;
   }
 
+
+  public gridState: State = {
+    sort: [],
+    skip: 0,
+    take: 10
+  };
   private editedRowIndex: number;
   private closeEditor(grid, rowIndex = this.editedRowIndex) {
     grid.closeRow(rowIndex);
   }
   public onStateChange(state: State) {
     this.gridState = state;
-
         // this.editService.read();
   }
   // Open Item edit Form
@@ -142,7 +139,7 @@ export class PoFormComponent implements OnInit {
   cancelItemHandler({sender, rowIndex}) {
     this.closeEditor(sender, rowIndex);
   }
-  handleItemChange(data) {
+  handleDropDownItemChange(data) {
     // console.log(data);
     let selected = this.products.find(p => p.Name === data);
     // console.log(selected);

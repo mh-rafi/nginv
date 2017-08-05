@@ -3,7 +3,7 @@
     </kendo-grid-column>
     <kendo-grid-column field="Vendor" title="Vendor" >
       <ng-template let-dataItem kendoGridCellTemplate>
-        {{dataItem.Vendor?.Name}}
+        {{dataItem.Customer?.Name}}
       </ng-template>
     </kendo-grid-column>
     <kendo-grid-column field="OrderDate" title="Order Date">
@@ -31,7 +31,7 @@
         md-button-sm 
         color="primary" 
         type="button"
-        [routerLink]="['/purchase-order/edit', dataItem.Id]"><md-icon>edit</md-icon></button>
+        [routerLink]="['/sales-order/edit', dataItem.Id]"><md-icon>edit</md-icon></button>
         <button 
         md-raised-button 
         md-icon-button 

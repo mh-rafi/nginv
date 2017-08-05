@@ -2,8 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 @Injectable()
-export class PurchaseOrderService {
-
+export class SalesOrderService {
   constructor() { }
   getAll() {
     return new Observable((observer) => {
@@ -37,57 +36,30 @@ export class PurchaseOrderService {
   removeOrder(id) {
     return this.getAll();
   }
-  
   orders = [{
     Id: 1,
-    Vendor: { Name: 'Apple', Id: '4234l3o4u893'},
+    Customer: { Name: 'Apple' },
     OrderNo: 'PO-042990',
     OrderDate: new Date(),
+    PaymentStatus: '',
     InventoryStatus: '',
     Location: '',
     RequestedShipDate: '',
+    ShippedDate: new Date(),
     DueDate: '',
     Total: 4000,
     Paid: 4000,
     Items: [{
       Name: 'iPhone',
-      isReceived: true,
+      isFullfilled: true,
       Quantity: 30,
       UnitPrice: 30,
-      VendorProductCode: 'fsd',
       Discount: 0
     }, {
       Name: 'iPad',
-      isReceived: false,
+      isFullfilled: false,
       Quantity: 20,
       UnitPrice: 30,
-      VendorProductCode: 'asd',
-      Discount: 10
-    }]
-  }, {
-    Id: 2,
-    Vendor: {Name: 'Samsung'},
-    OrderNo: 'PO-04292432',
-    OrderDate: new Date(),
-    InventoryStatus: 1,
-    Location: '',
-    RequestedShipDate: '',
-    DueDate: '',
-    Total: 4000,
-    Paid: 4000,
-    Items: [{
-      Name: 'Samsung phone',
-      isReceived: true,
-      Quantity: 30,
-      UnitPrice: 30,
-      VendorProductCode: 'fsd',
-      Discount: 0
-    }, {
-      Name: 'LED TV',
-      isReceived: false,
-      Quantity: 20,
-      UnitPrice: 30,
-      VendorProductCode: 'asd',
       Discount: 10
     }]
   }]

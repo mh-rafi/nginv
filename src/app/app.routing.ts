@@ -5,7 +5,9 @@ import { AuthLayoutComponent } from './layouts/auth/auth-layout.component';
 
 import { AuthService } from './services/auth/auth.service';
 
-export const AppRoutes: Routes = [{
+export const AppRoutes: Routes = [
+  {path: '', redirectTo: 'home', pathMatch: 'full'},
+  {
   path: '',
   component: AdminLayoutComponent, canActivate: [AuthService],
   children: [{
@@ -18,8 +20,14 @@ export const AppRoutes: Routes = [{
     path: 'purchase-order',
     loadChildren: './views/purchase-order/purchase-order.module#PurchaseOrderModule'
   }, {
-    path: 'product',
-    loadChildren: './views/products/products.module#ProductsModule'
+    path: 'inventory',
+    loadChildren: './views/inventory/inventory.module#InventoryModule'
+  }, {
+    path: 'sales-order',
+    loadChildren: './views/sales-order/sales-order.module#SalesOrderModule'
+  }, {
+    path: 'customer',
+    loadChildren: './views/customers/customers.module#CustomersModule'
   }]
 }, {
   path: '',

@@ -1,0 +1,115 @@
+<md-card>
+  <md-card-title>{{title | translate}}</md-card-title>
+  <md-card-subtitle>{{subtitle | translate}}</md-card-subtitle>
+  <form [formGroup]="form" (submit)="onFormSubmit()">
+    <md-card-content>
+      <div fxLayout="row" fxLayoutWrap="wrap">
+        <div fxLayout="column" fxFlex.gt-xs="50" fxFlex="100" class="pr-1">
+
+          <div class="mb-1">
+            <md-input-container style="width: 100%">
+              <input 
+              mdInput 
+              placeholder="Name"
+              name="Name"
+              [(ngModel)]="targetObject.Name" 
+              [formControl]="form.controls['name']">
+            </md-input-container>
+            <small *ngIf="form.controls['name'].hasError('required') && form.controls['name'].touched" class="mat-text-warn">You must include a name.</small>
+          </div>
+
+          <div class="mb-1">
+            <md-input-container style="width: 100%">
+              <input 
+              mdInput 
+              placeholder="Email address"
+              [(ngModel)]="targetObject.Email" 
+              [formControl]="form.controls['email']" 
+              type="email">
+            </md-input-container>
+            <small *ngIf="form.controls['email'].hasError('required') && form.controls['email'].touched" class="mat-text-warn">You must include an email address.</small>
+            <small *ngIf="form.controls['email'].errors?.email && form.controls['email'].touched" class="mat-text-warn">You must include a valid email address.</small>
+          </div>
+
+          <div class="mb-1">
+            <md-input-container style="width: 100%">
+              <input 
+              mdInput 
+              placeholder="Phone"
+              [(ngModel)]="targetObject.Phone" 
+              [formControl]="form.controls['phone']">
+            </md-input-container>
+            <small *ngIf="form.controls['phone'].hasError('required') && form.controls['phone'].touched" class="mat-text-warn">You must include an phone number.</small>
+          </div>
+
+          <div class="mb-1">
+            <md-input-container style="width: 100%">
+              <input 
+              mdInput 
+              placeholder="Website"
+              [(ngModel)]="targetObject.Website" 
+              [formControl]="form.controls['website']">
+            </md-input-container>
+          </div>
+        </div>
+
+        <div fxLayout="column" fxFlex.gt-xs="50" fxFlex="100">
+          <div class="mb-1">
+            <md-input-container style="width: 100%">
+              <input 
+              mdInput 
+              placeholder="Address"
+              [(ngModel)]="targetObject.Address" 
+              [formControl]="form.controls['address']">
+            </md-input-container>
+          </div>
+
+          <div class="mb-1">
+            <md-input-container style="width: 100%">
+              <input 
+              mdInput 
+              placeholder="City"
+              [(ngModel)]="targetObject.City" 
+              [formControl]="form.controls['city']">
+            </md-input-container>
+          </div>
+
+          <div class="mb-1">
+            <md-input-container style="width: 100%">
+              <input 
+              mdInput 
+              placeholder="State"
+              [(ngModel)]="targetObject.State" 
+              [formControl]="form.controls['state']">
+            </md-input-container>
+          </div>
+
+          <div class="mb-1">
+            <md-input-container style="width: 100%">
+              <input 
+              mdInput 
+              placeholder="Discount"
+              [(ngModel)]="targetObject.Discount" 
+              [formControl]="form.controls['discount']">
+            </md-input-container>
+          </div>
+
+        </div>
+      </div>
+    </md-card-content>
+    <hr>
+    <md-card-actions>
+      <button 
+      md-raised-button 
+      color="primary" 
+      type="submit" 
+      [disabled]="!form.valid">{{buttonText | translate}}</button>
+      <span fxFlex></span>
+      <button 
+      md-raised-button 
+      color="accent" 
+      type="button"
+      [routerLink]="['/', targetType, 'list']">Back to {{targetType}} list</button>
+    </md-card-actions>
+  </form>
+</md-card>
