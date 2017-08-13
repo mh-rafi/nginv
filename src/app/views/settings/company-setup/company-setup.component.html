@@ -1,0 +1,159 @@
+<md-card>
+  <md-card-title>Company Setup</md-card-title>
+  <form [formGroup]="form" (submit)="onFormSubmit()">
+    <md-card-content>
+      <div fxLayout="row" fxLayoutWrap="wrap">
+        <div fxLayout="column" fxFlex.gt-xs="50" fxFlex="100" class="pr-1">
+
+          <div class="mb-1">
+            <md-input-container style="width: 100%">
+              <input 
+              mdInput 
+              placeholder="Name"
+              name="Name"
+              [(ngModel)]="company.Name"
+              [formControl]="form.controls['name']">
+            </md-input-container>
+            <small *ngIf="form.controls['name'].hasError('required') && form.controls['name'].touched" class="mat-text-warn">Name is required.</small>
+          </div>
+
+          <div class="mb-1">
+            <md-input-container style="width: 100%">
+              <input 
+              mdInput 
+              placeholder="Phone"
+              name="Phone"
+              [(ngModel)]="company.Phone"
+              [formControl]="form.controls['phone']">
+            </md-input-container>
+            <small *ngIf="form.controls['phone'].hasError('required') && form.controls['phone'].touched" class="mat-text-warn">Phone is required.</small>
+          </div>
+
+          <div class="mb-1">
+            <md-input-container style="width: 100%">
+              <input 
+              mdInput 
+              placeholder="Fax"
+              name="Fax"
+              [(ngModel)]="company.Fax"
+              [formControl]="form.controls['fax']">
+            </md-input-container>
+          </div>
+
+          <div class="mb-1">
+            <md-input-container style="width: 100%">
+              <input 
+              mdInput 
+              placeholder="Email"
+              name="Email"
+              [(ngModel)]="company.Email"
+              [formControl]="form.controls['email']">
+            </md-input-container>
+          </div>
+
+          <div class="mb-1">
+            <md-input-container style="width: 100%">
+              <input 
+              mdInput 
+              placeholder="Website"
+              name="Website"
+              [(ngModel)]="company.Website"
+              [formControl]="form.controls['website']">
+            </md-input-container>
+          </div>
+
+          <div class="mb-1">
+            <md-input-container style="width: 100%">
+              <input 
+              mdInput 
+              placeholder="Tax Number"
+              name="TaxNumber"
+              [(ngModel)]="company.TaxNumber"
+              [formControl]="form.controls['taxNumber']">
+            </md-input-container>
+          </div>
+        </div>
+
+        <div fxLayout="column" fxFlex.gt-xs="50" fxFlex="100" class="pr-1">
+          <div class="mb-1">
+            <md-input-container style="width: 100%">
+              <input 
+              mdInput 
+              placeholder="Address Line 1"
+              name="AddressLine1"
+              [(ngModel)]="company.AddressLine1"
+              [formControl]="form.controls['addressLine1']">
+            </md-input-container>
+          </div>
+
+          <div class="mb-1">
+            <md-input-container style="width: 100%">
+              <input 
+              mdInput 
+              placeholder="Address Line 2"
+              name="AddressLine1"
+              [(ngModel)]="company.AddressLine2"
+              [formControl]="form.controls['addressLine2']">
+            </md-input-container>
+          </div>
+
+          <div class="mb-1">
+            <md-input-container style="width: 100%">
+              <input 
+              mdInput 
+              placeholder="City"
+              name="City"
+              [(ngModel)]="company.City"
+              [formControl]="form.controls['city']">
+            </md-input-container>
+          </div>
+
+          <div class="mb-1">
+            <md-input-container style="width: 100%">
+              <input 
+              mdInput 
+              placeholder="State"
+              name="State"
+              [(ngModel)]="company.State"
+              [formControl]="form.controls['state']">
+            </md-input-container>
+          </div>
+
+          <div class="mb-1">
+            <md-input-container style="width: 100%">
+              <input 
+              mdInput 
+              placeholder="Country"
+              name="Country"
+              [mdAutocomplete]="countryAutocomplete"
+              [(ngModel)]="company.Country"
+              [formControl]="form.controls['country']">
+            </md-input-container>
+            <md-autocomplete #countryAutocomplete="mdAutocomplete">
+              <md-option *ngFor="let country of filteredCountries | async" [value]="country.name">
+                {{ country.name }}
+              </md-option>
+            </md-autocomplete>
+          </div>
+
+          <div class="mb-1">
+            <md-input-container style="width: 100%">
+              <input 
+              mdInput 
+              placeholder="Zip/Postal Code"
+              name="Zip"
+              [(ngModel)]="company.Zip"
+              [formControl]="form.controls['zip']">
+            </md-input-container>
+          </div>
+
+        </div>
+        <button 
+        type="submit"
+        [disabled]="!form.valid"
+        color="primary"
+        md-raised-button>Save</button>
+      </div>
+    </md-card-content>
+  </form>
+</md-card>

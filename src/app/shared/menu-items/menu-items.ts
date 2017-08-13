@@ -80,6 +80,17 @@ const MENUITEMS = [
       {state: 'add', name: 'Add New Cutomer'}
     ]
   },
+  {
+    state: 'settings',
+    name: 'Settings',
+    type: 'sub',
+    icon: 'settings',
+    badge: [],
+    children: [
+      {state: 'company', name: 'Company Setup'},
+      {state: 'warehouse', name: 'Warehouse Setup'}
+    ]
+  },
 ];
 
 @Injectable()

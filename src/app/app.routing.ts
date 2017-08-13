@@ -28,6 +28,9 @@ export const AppRoutes: Routes = [
   }, {
     path: 'customer',
     loadChildren: './views/customers/customers.module#CustomersModule'
+  }, {
+    path: 'settings',
+    loadChildren: './views/settings/settings.module#SettingsModule'
   }]
 }, {
   path: '',

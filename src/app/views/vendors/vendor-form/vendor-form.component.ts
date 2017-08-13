@@ -27,7 +27,7 @@ export class VendorFormComponent implements OnInit {
   constructor(private fb: FormBuilder) {}
 
   ngOnInit() {
-    console.log(this.vendor);
+    // console.log(this.vendor);
     this.form = this.fb.group({
       name: [null, Validators.compose([Validators.required])],
       email: [null, Validators.compose([CustomValidators.email])],

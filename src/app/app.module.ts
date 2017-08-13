@@ -18,6 +18,7 @@ import { PurchaseOrderService } from './services/purchase-order/purchase-order.s
 import { ProductService } from './services/product/product.service';
 import { SalesOrderService } from './services/sales-order/sales-order.service';
 import { CustomerService } from './services/customer/customer.service';
+import { CountryService } from "./services/country/country.service";
 
 import { AppRoutes } from './app.routing';
 import { AppComponent } from './app.component';
@@ -60,7 +61,8 @@ export function createTranslateLoader(http: Http) {
     PurchaseOrderService,
     ProductService,
     SalesOrderService,
-    CustomerService
+    CustomerService,
+    CountryService
   ],
   bootstrap: [AppComponent]
 })
