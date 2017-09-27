@@ -10,7 +10,19 @@ import { CountryService } from "../../../services/country/country.service";
   styleUrls: ['./warehouse-setup.component.scss']
 })
 export class WarehouseSetupComponent implements OnInit {
-  warehouse = {};
+  warehouse = {
+    ID: '',
+    Email: '',
+    Phone: '',
+    Fax: '',
+    Website: '',
+    AddressLine1: '',
+    AddressLine2: '',
+    City: '',
+    State: '',
+    Country: '',
+    Zip: '',
+  };
   form: FormGroup;
   filteredCountries;
   countries;

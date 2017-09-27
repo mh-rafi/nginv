@@ -13,7 +13,21 @@ import 'rxjs/add/operator/map';
   styleUrls: ['./company-setup.component.scss']
 })
 export class CompanySetupComponent implements OnInit {
-  company = {};
+  company:Company = {
+    Name: '',
+    Email: '',
+    Phone: '',
+    Fax: '',
+    Website: '',
+    AddressLine1: '',
+    AddressLine2: '',
+    City: '',
+    State: '',
+    Country: '',
+    Zip: '',
+    TaxNumber: '',
+    Logo: ''
+  };
   form: FormGroup;
   filteredCountries;
   countries;
